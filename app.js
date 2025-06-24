@@ -52,24 +52,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const isAndroid = /Android/i.test(navigator.userAgent);
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-  arButtons.forEach(button => {
+  arButtons.forEach((button) => {
     const glb = button.dataset.gltf;
     const usdz = button.dataset.usdz;
 
     if (isAndroid && glb) {
+      // For Android, open Google Scene Viewer intent link instantly
       const sceneViewerUrl =
         `intent://arvr.google.com/scene-viewer/1.0?file=${location.origin}/${glb}` +
         `#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`;
       button.href = sceneViewerUrl;
+      button.setAttribute("target", "_blank");
       button.style.display = "inline-block";
     } else if (isIOS && usdz) {
+      // For iOS, just link to the .usdz with rel="ar"
       button.href = usdz;
       button.setAttribute("rel", "ar");
       button.style.display = "inline-block";
     } else {
+      // Hide on other devices
       button.style.display = "none";
     }
   });
 
-  show(); // Initial show
+  show(); // Initial render
 });

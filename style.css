@@ -99,55 +99,53 @@ header li:hover {
   height: 420px;
 }
 
+/* Buttons container below each photo */
 .images .item .image-buttons-container {
   position: absolute;
-  bottom: 100px;
+  bottom: 100px; /* Buttons placed below the image */
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  display: none;
-  justify-content: center;
-  gap: 20px;
+  display: none; /* Hidden by default */
+  justify-content: center; /* Center buttons horizontally */
+  gap: 20px; /* Space between buttons */
   z-index: 10;
-  rotate: calc(-1 * var(--i) * 60deg);
+  rotate: calc(-1 * var(--i) * 60deg); /* Counter-rotation so buttons stay upright */
 }
 
+/* Show buttons only on active image */
 .images .item.active .image-buttons-container {
   display: flex !important;
 }
 
+/* Style for both buttons: orange background, white text, orange border */
 .images .item .ar-button,
 .images .item .see-more-btn {
   padding: 12px 25px;
   border-radius: 25px;
-  text-decoration: none;
   font-size: 1em;
   cursor: pointer;
-  border: none;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  white-space: nowrap;
-}
-
-.images .item .ar-button {
+  border: 2px solid #e88735;
   background-color: #e88735;
   color: #fff;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  user-select: none;
 }
 
-.images .item .ar-button:hover {
+.images .item .ar-button:hover,
+.images .item .see-more-btn:hover {
   background-color: #d1752b;
   transform: translateY(-2px);
 }
 
 .images .item .see-more-btn {
+  border: 2px solid #e88735;
   background-color: #e88735;
   color: #fff;
-}
-
-.images .item .see-more-btn:hover {
-  background-color: #d1752b;
-  transform: translateY(-2px);
 }
 
 .content {
@@ -206,6 +204,7 @@ header li:hover {
   font-weight: bold;
   opacity: 0.3;
   cursor: pointer;
+  user-select: none;
 }
 
 #next {
@@ -223,26 +222,4 @@ header li:hover {
   .ar-button {
     display: none !important;
   }
-}
-
-/* Make sure AR buttons are styled and visible on mobile */
-.ar-button {
-  display: inline-block;
-  background-color: #e88735;
-  color: #fff;
-  padding: 12px 25px;
-  border-radius: 25px;
-  font-size: 1em;
-  text-decoration: none;
-  cursor: pointer;
-  border: none;
-  text-align: center;
-  white-space: nowrap;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.ar-button:hover {
-  background-color: #d1752b;
-  transform: translateY(-2px);
 }
