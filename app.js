@@ -1,20 +1,13 @@
 let prev = document.getElementById('prev');
 let next = document.getElementById('next');
 let image = document.querySelector('.images');
-let items = document.querySelectorAll('.images .item');
-let contents = document.querySelectorAll('.content .item');
-let arButton = document.getElementById('arButton'); // NEW: Get reference to the single AR button
+let items = document.querySelectorAll('.images .item'); // Refers to the .images .item elements
+let contents = document.querySelectorAll('.content .item'); // Refers to the .content .item elements
 
 let rotate = 0;
 let active = 0;
-let countItem = items.length;
+let countItem = items.length; // Still refers to image items for counting
 let rotateAdd = 360 / countItem;
-
-// Since all your products use the same AR model, we can define it once
-const commonArModel = {
-    usdz: 'ar_models/Sushi.usdz',
-    glb: 'ar_models/Sushi.glb'
-};
 
 function nextSlider(){
     active = active + 1 > countItem - 1 ? 0 : active + 1;
@@ -31,10 +24,7 @@ function prevSlider(){
 function show(){
     image.style.setProperty("--rotate", rotate + 'deg');
 
-    // NEW: Update the single AR button's links for the active slide
-    arButton.href = commonArModel.usdz;
-    arButton.dataset.gltf = commonArModel.glb;
-
+    // Update active class for content items
     contents.forEach((content, key) => {
         if(key == active){
             content.classList.add('active');
@@ -42,8 +32,20 @@ function show(){
             content.classList.remove('active');
         }
     });
+
+    // NEW: Update active class for image items (this will control button visibility)
+    items.forEach((item, key) => {
+        if(key == active){
+            item.classList.add('active');
+        }else{
+            item.classList.remove('active');
+        }
+    });
 }
 
 next.onclick = nextSlider;
 prev.onclick = prevSlider;
 const autoNext = setInterval(nextSlider, 3000);
+
+// Initial call to show the first slide and its buttons
+show();
