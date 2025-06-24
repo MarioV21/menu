@@ -24,20 +24,18 @@ header ul {
 
 /* MODIFIED: Removed padding from li, it's now on the <a> inside */
 header li {
-    /* padding: 30px 40px; <-- REMOVED */
     color: #fff;
-    cursor: pointer; /* Ensure li itself has pointer cursor for consistency */
+    cursor: pointer;
 }
 
-/* NEW: Styles for all <a> tags inside header li */
+/* Styles for all <a> tags inside header li */
 header li a {
-    color: inherit; /* Inherit the white color from the parent li */
-    text-decoration: none; /* Remove the default underline */
-    display: block; /* Make the entire padded area clickable */
-    padding: 30px 40px; /* Apply padding to the clickable link area */
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    padding: 30px 40px;
 }
 
-/* Existing hover/active styles now apply to li, affecting the child a implicitly */
 header li.active,
 header li:hover {
     border-bottom: 2px solid #fff;
@@ -116,44 +114,48 @@ header li:hover {
     font-size: xxx-large;
 }
 
-/* NEW: Styles for the button container inside content */
-.content .buttons-container {
-    display: flex;
-    justify-content: space-between; /* Pushes buttons to opposite ends */
-    align-items: center;
-    margin-top: 30px;
-    width: 100%;
-}
+/* REMOVED: Styles for .content .buttons-container are no longer needed */
+/* .content .buttons-container { ... } */
 
-/* MODIFIED: Existing "See more" button style, now with a specific class */
+
+/* MODIFIED: Existing "See more" button style */
 .content button.see-more-btn {
+    margin-top: 30px; /* Keep margin */
     padding: 10px 30px;
     border-radius: 20px;
     background-color: #E88735;
     color: #fff;
     border: none;
+    float: right; /* Re-add float for single button */
     cursor: pointer;
 }
 
-/* NEW: Styles for the AR button */
-.ar-button {
-    background-color: #478860; /* A distinct color for AR button */
+/* NEW: Styles for the single AR button below the image */
+#arButton {
+    position: absolute;
+    bottom: 5%; /* Adjust distance from bottom as needed */
+    left: 25%; /* Roughly centers it under the image */
+    transform: translateX(-50%); /* Centers the button horizontally based on its own width */
+    z-index: 50; /* Ensures it's above other elements if overlaps */
+
+    /* Basic button styling (can be shared with .ar-button if desired) */
+    background-color: #478860; /* Green color */
     color: #fff;
-    padding: 10px 20px;
+    padding: 15px 30px; /* Slightly larger padding */
     border-radius: 20px;
     text-decoration: none; /* Remove underline */
-    font-size: 0.9em;
-    display: inline-block; /* Allows padding and alignment */
+    font-size: 1.1em; /* Slightly larger font */
+    display: inline-block; /* Allows padding and transformation */
     cursor: pointer;
     border: none;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
-    white-space: nowrap; /* Prevent text wrapping */
+    white-space: nowrap; /* Prevent text from wrapping */
 }
 
-.ar-button:hover {
-    background-color: #3a704f; /* Darker on hover */
+#arButton:hover {
+    background-color: #3a704f; /* Darker green on hover */
 }
 
 
@@ -185,8 +187,8 @@ header li:hover {
     animation: showContent 0.5s 0.3s ease-in-out 1 forwards;
 }
 
-/* NEW: Apply animation to the buttons container instead of individual button */
-.content .item.active .buttons-container {
+/* MODIFIED: Apply animation directly to the "See more" button */
+.content .item.active .see-more-btn {
     opacity: 0;
     animation: showContent 0.5s 0.6s ease-in-out 1 forwards;
 }
