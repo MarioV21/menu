@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   autoNextInterval = setInterval(nextSlider, 3000);
 
-  // AR Button Platform Handling
+  // --- AR Button Setup ---
   const arButtons = document.querySelectorAll(".ar-button");
   const isAndroid = /Android/i.test(navigator.userAgent);
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -57,16 +57,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const usdz = button.dataset.usdz;
 
     if (isAndroid && glb) {
-      button.href =
+      const sceneViewerUrl =
         `intent://arvr.google.com/scene-viewer/1.0?file=${location.origin}/${glb}` +
         `#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`;
+      button.href = sceneViewerUrl;
+      button.style.display = "inline-block";
     } else if (isIOS && usdz) {
       button.href = usdz;
       button.setAttribute("rel", "ar");
+      button.style.display = "inline-block";
     } else {
-      button.style.display = "none"; // Hide on desktop or unsupported
+      button.style.display = "none";
     }
   });
 
-  show();
+  show(); // Initial show
 });

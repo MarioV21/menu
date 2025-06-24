@@ -226,3 +226,31 @@ header li:hover {
         display: none !important;
     }
 }
+/* Ensure AR button is hidden on large screens by default */
+@media (min-width: 1025px) {
+  .ar-button {
+    display: none !important;
+  }
+}
+
+/* Ensure it's visible when activated via JS on mobile */
+.ar-button {
+  display: inline-block;
+  background-color: #E88735;
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-size: 1em;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.ar-button:hover {
+  background-color: #d1752b;
+  transform: translateY(-2px);
+}
