@@ -73,7 +73,7 @@ header li:hover {
 
 .images {
   position: absolute;
-  bottom: 0%;
+  bottom: 0;
   left: 50%;
   --rotate: 0deg;
   transform: translate(-50%, 50%) rotate(var(--rotate));
@@ -92,30 +92,28 @@ header li:hover {
   height: 100%;
   text-align: center;
   rotate: calc(60deg * var(--i));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 60px;
 }
 
 .images .item img {
   height: 420px;
 }
 
-/* Buttons container */
 .image-buttons-container {
-  position: absolute;
-  top: calc(100% + 10px); /* below image */
-  left: 50%;
-  transform: translateX(-50%) rotate(calc(-60deg * var(--i)));
   display: none;
   flex-direction: row;
   gap: 15px;
   z-index: 5;
 }
 
-/* Show on active */
 .item.active .image-buttons-container {
   display: flex !important;
 }
 
-/* Button styles */
 .ar-button,
 .see-more-btn {
   background-color: #E88735;
@@ -204,4 +202,33 @@ header li:hover {
 #prev:hover,
 #next:hover {
   opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .images {
+    transform: translate(-50%, 40%) rotate(var(--rotate));
+    width: 1000px;
+    height: 1000px;
+  }
+
+  .images .item img {
+    height: 280px;
+  }
+
+  .ar-button,
+  .see-more-btn {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
+
+  .title {
+    font-size: 80px;
+    right: 50%;
+    width: 50%;
+  }
+
+  .content {
+    width: 300px;
+    left: 55%;
+  }
 }
