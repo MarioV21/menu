@@ -235,3 +235,12 @@ header li:hover {
     display: none !important;
   }
 }
+.image-buttons-container {
+  display: flex !important;
+  position: relative;
+  transform: none;
+  bottom: auto;
+  left: auto;
+  justify-content: center;
+  gap: 10px;
+}
