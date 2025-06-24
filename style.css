@@ -217,3 +217,21 @@ header li:hover {
     display: none !important;
   }
 }
+
+/* Make sure AR buttons show properly */
+.ios-only {
+  display: inline-block;
+}
+.android-only {
+  display: none;
+}
+
+/* Show model-viewer button only on Android */
+@media screen and (max-width: 1024px) {
+  .android-only {
+    display: inline-block !important;
+  }
+  .ios-only {
+    display: none !important;
+  }
+}
