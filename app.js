@@ -1,30 +1,39 @@
 let prev, next, image, items, contents;
 let rotate = 0;
 let active = 0;
-let countItem, rotateAdd, autoNextInterval;
+let countItem;
+let rotateAdd;
+let autoNextInterval;
+
+function show() {
+  // Rotate the container
+  image.style.setProperty("--rotate", rotate + "deg");
+
+  // Toggle active class for content
+  contents.forEach((content, key) => {
+    if (key === active) content.classList.add("active");
+    else content.classList.remove("active");
+  });
+
+  // Toggle active class for images (controls button visibility too)
+  items.forEach((item, key) => {
+    if (key === active) item.classList.add("active");
+    else item.classList.remove("active");
+  });
+}
 
 function nextSlider() {
-  active = (active + 1) % countItem;
+  active++;
+  if (active >= countItem) active = 0;
   rotate += rotateAdd;
   show();
 }
 
 function prevSlider() {
-  active = (active - 1 + countItem) % countItem;
+  active--;
+  if (active < 0) active = countItem - 1;
   rotate -= rotateAdd;
   show();
-}
-
-function show() {
-  image.style.setProperty("--rotate", rotate + "deg");
-
-  contents.forEach((content, key) => {
-    content.classList.toggle("active", key === active);
-  });
-
-  items.forEach((item, key) => {
-    item.classList.toggle("active", key === active);
-  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -35,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
   contents = document.querySelectorAll(".content .item");
 
   if (!prev || !next || !image || items.length === 0 || contents.length === 0) {
-    console.error("Critical DOM elements not found.");
+    console.error("Required DOM elements missing");
     return;
   }
 
@@ -45,35 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
   prev.onclick = prevSlider;
   next.onclick = nextSlider;
 
+  // Start automatic slider rotation every 3 seconds
   autoNextInterval = setInterval(nextSlider, 3000);
 
-  // --- AR Button Setup ---
-  const arButtons = document.querySelectorAll(".ar-button");
-  const isAndroid = /Android/i.test(navigator.userAgent);
-  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  // Initial display setup
+  show();
 
-  arButtons.forEach((button) => {
-    const glb = button.dataset.gltf;
-    const usdz = button.dataset.usdz;
-
-    if (isAndroid && glb) {
-      // For Android, open Google Scene Viewer intent link instantly
-      const sceneViewerUrl =
-        `intent://arvr.google.com/scene-viewer/1.0?file=${location.origin}/${glb}` +
-        `#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`;
-      button.href = sceneViewerUrl;
-      button.setAttribute("target", "_blank");
-      button.style.display = "inline-block";
-    } else if (isIOS && usdz) {
-      // For iOS, just link to the .usdz with rel="ar"
-      button.href = usdz;
-      button.setAttribute("rel", "ar");
-      button.style.display = "inline-block";
-    } else {
-      // Hide on other devices
-      button.style.display = "none";
-    }
-  });
-
-  show(); // Initial render
+  // Optional: stop auto sliding on user interaction (uncomment if you want)
+  // [prev, next].forEach(btn => btn.addEventListener('click', () => clearInterval(autoNextInterval)));
 });

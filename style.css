@@ -3,6 +3,8 @@
 body {
   margin: 0;
   font-family: monospace;
+  background: #0d0e12;
+  color: #fff;
 }
 
 header {
@@ -18,7 +20,6 @@ header ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   list-style: none;
 }
 
@@ -93,32 +94,34 @@ header li:hover {
   height: 100%;
   text-align: center;
   rotate: calc(60deg * var(--i));
+  transform-origin: center center;
 }
 
 .images .item img {
   height: 420px;
+  pointer-events: none; /* So clicks pass through to buttons */
 }
 
 /* Buttons container below each photo */
 .images .item .image-buttons-container {
   position: absolute;
-  bottom: 100px; /* Buttons placed below the image */
+  bottom: 100px; /* Buttons below image */
   left: 50%;
   transform: translateX(-50%);
-  width: 100%;
+  width: auto;
   display: none; /* Hidden by default */
-  justify-content: center; /* Center buttons horizontally */
-  gap: 20px; /* Space between buttons */
+  justify-content: center;
+  gap: 20px;
   z-index: 10;
-  rotate: calc(-1 * var(--i) * 60deg); /* Counter-rotation so buttons stay upright */
+  rotate: calc(-1 * var(--i) * 60deg); /* counter rotation */
 }
 
-/* Show buttons only on active image */
+/* Show buttons only on active slide */
 .images .item.active .image-buttons-container {
   display: flex !important;
 }
 
-/* Style for both buttons: orange background, white text, orange border */
+/* Buttons styles */
 .images .item .ar-button,
 .images .item .see-more-btn {
   padding: 12px 25px;
@@ -131,21 +134,15 @@ header li:hover {
   text-decoration: none;
   text-align: center;
   white-space: nowrap;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   user-select: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .images .item .ar-button:hover,
 .images .item .see-more-btn:hover {
   background-color: #d1752b;
   transform: translateY(-2px);
-}
-
-.images .item .see-more-btn {
-  border: 2px solid #e88735;
-  background-color: #e88735;
-  color: #fff;
 }
 
 .content {
@@ -205,6 +202,7 @@ header li:hover {
   opacity: 0.3;
   cursor: pointer;
   user-select: none;
+  transform: translateY(-50%);
 }
 
 #next {
