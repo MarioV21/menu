@@ -3,60 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Slider Pizza!</title>
+  <title>Pizza AR Slider</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <ul>
       <li class="active">Home</li>
-      <li><a href="roul.html">AR Roulette</a></li>
+      <li class="ar-roulette-btn"><a href="roul.html">AR Roulette</a></li>
     </ul>
   </header>
 
   <div class="slider">
     <div class="title">Slider Pizza!</div>
-
     <div class="images">
+      <!-- Repeat this block for each image item -->
       <div class="item" style="--i: 1;">
-        <img src="p1.png" alt="Pizza 1" />
+        <img src="p1.png" alt="Pizza 1">
         <div class="image-buttons-container">
-          <a href="ar_models/Sushi.usdz" rel="ar" class="ar-button" data-gltf="ar_models/Sushi.glb">View in AR</a>
+          <a class="ar-button" rel="ar" href="ar_models/Sushi.usdz" data-gltf="ar_models/Sushi.glb" data-usdz="ar_models/Sushi.usdz">View in AR</a>
           <button class="see-more-btn">See more</button>
         </div>
       </div>
       <div class="item" style="--i: 2;">
-        <img src="p1.png" alt="Pizza 2" />
+        <img src="p1.png" alt="Pizza 2">
         <div class="image-buttons-container">
-          <a href="ar_models/Sushi.usdz" rel="ar" class="ar-button" data-gltf="ar_models/Sushi.glb">View in AR</a>
+          <a class="ar-button" rel="ar" href="ar_models/Sushi.usdz" data-gltf="ar_models/Sushi.glb" data-usdz="ar_models/Sushi.usdz">View in AR</a>
           <button class="see-more-btn">See more</button>
         </div>
       </div>
       <div class="item" style="--i: 3;">
-        <img src="p1.png" alt="Pizza 3" />
+        <img src="p1.png" alt="Pizza 3">
         <div class="image-buttons-container">
-          <a href="ar_models/Sushi.usdz" rel="ar" class="ar-button" data-gltf="ar_models/Sushi.glb">View in AR</a>
+          <a class="ar-button" rel="ar" href="ar_models/Sushi.usdz" data-gltf="ar_models/Sushi.glb" data-usdz="ar_models/Sushi.usdz">View in AR</a>
           <button class="see-more-btn">See more</button>
         </div>
       </div>
       <div class="item" style="--i: 4;">
-        <img src="p1.png" alt="Pizza 4" />
+        <img src="p1.png" alt="Pizza 4">
         <div class="image-buttons-container">
-          <a href="ar_models/Sushi.usdz" rel="ar" class="ar-button" data-gltf="ar_models/Sushi.glb">View in AR</a>
+          <a class="ar-button" rel="ar" href="ar_models/Sushi.usdz" data-gltf="ar_models/Sushi.glb" data-usdz="ar_models/Sushi.usdz">View in AR</a>
           <button class="see-more-btn">See more</button>
         </div>
       </div>
       <div class="item" style="--i: 5;">
-        <img src="p1.png" alt="Pizza 5" />
+        <img src="p1.png" alt="Pizza 5">
         <div class="image-buttons-container">
-          <a href="ar_models/Sushi.usdz" rel="ar" class="ar-button" data-gltf="ar_models/Sushi.glb">View in AR</a>
+          <a class="ar-button" rel="ar" href="ar_models/Sushi.usdz" data-gltf="ar_models/Sushi.glb" data-usdz="ar_models/Sushi.usdz">View in AR</a>
           <button class="see-more-btn">See more</button>
         </div>
       </div>
       <div class="item" style="--i: 6;">
-        <img src="p1.png" alt="Pizza 6" />
+        <img src="p1.png" alt="Pizza 6">
         <div class="image-buttons-container">
-          <a href="ar_models/Sushi.usdz" rel="ar" class="ar-button" data-gltf="ar_models/Sushi.glb">View in AR</a>
+          <a class="ar-button" rel="ar" href="ar_models/Sushi.usdz" data-gltf="ar_models/Sushi.glb" data-usdz="ar_models/Sushi.usdz">View in AR</a>
           <button class="see-more-btn">See more</button>
         </div>
       </div>
@@ -65,34 +65,55 @@
     <div class="content">
       <div class="item active">
         <h1>PRODUCT NAME 1</h1>
-        <div class="des">Lorem ipsum dolor sit amet consectetur...</div>
+        <div class="des">Description for Product 1</div>
       </div>
       <div class="item">
         <h1>PRODUCT NAME 2</h1>
-        <div class="des">Lorem ipsum dolor sit amet consectetur...</div>
+        <div class="des">Description for Product 2</div>
       </div>
       <div class="item">
         <h1>PRODUCT NAME 3</h1>
-        <div class="des">Lorem ipsum dolor sit amet consectetur...</div>
+        <div class="des">Description for Product 3</div>
       </div>
       <div class="item">
         <h1>PRODUCT NAME 4</h1>
-        <div class="des">Lorem ipsum dolor sit amet consectetur...</div>
+        <div class="des">Description for Product 4</div>
       </div>
       <div class="item">
         <h1>PRODUCT NAME 5</h1>
-        <div class="des">Lorem ipsum dolor sit amet consectetur...</div>
+        <div class="des">Description for Product 5</div>
       </div>
       <div class="item">
         <h1>PRODUCT NAME 6</h1>
-        <div class="des">Lorem ipsum dolor sit amet consectetur...</div>
+        <div class="des">Description for Product 6</div>
       </div>
     </div>
 
-    <button id="prev">&#10094;</button>
-    <button id="next">&#10095;</button>
+    <button id="prev">&lt;</button>
+    <button id="next">&gt;</button>
   </div>
 
-  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+      document.querySelectorAll('.ar-button').forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          const usdz = button.getAttribute('data-usdz');
+          const glb = button.getAttribute('data-gltf');
+
+          if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            window.location.href = usdz;
+          } else if (/Android/i.test(navigator.userAgent)) {
+            const sceneViewer = `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(glb)}&mode=ar_only#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(glb)};end;`;
+            window.location.href = sceneViewer;
+          } else {
+            alert('AR view is supported on mobile only.');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
