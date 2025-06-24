@@ -46,6 +46,7 @@ header li:hover {
     height: 100vh;
     background-image: linear-gradient(to right, #2B2F3A, #0D0E12);
     overflow: hidden;
+    z-index: 1; /* Added to ensure proper stacking context */
 }
 
 .slider::before {
@@ -84,6 +85,7 @@ header li:hover {
     transition: transform 0.5s ease-in-out;
     outline: 3px dashed #fff5;
     outline-offset: -100px;
+    z-index: 2; /* Ensures images are above slider background */
 }
 
 .images .item {
@@ -92,8 +94,7 @@ header li:hover {
     height: 100%;
     text-align: center;
     rotate: calc(60deg * var(--i));
-    /* The transition for 'opacity' might still be here, but 'display' takes precedence */
-    /* If you want fade, remove display:none/flex and use opacity/pointer-events */
+    /* No opacity transition here, display handles visibility */
 }
 
 .images .item img {
@@ -107,11 +108,12 @@ header li:hover {
     left: 50%; /* Center horizontally */
     transform: translateX(-50%); /* For true centering */
     width: 100%;
-    /* Changed from opacity/pointer-events to display:none/flex */
+    
+    /* NEW: Changed from opacity/pointer-events to display */
     display: none; /* Hidden by default */
     justify-content: center; /* Center buttons horizontally */
     gap: 20px; /* Space between the two buttons */
-    z-index: 10; /* Ensure they are above other parts if needed */
+    z-index: 10; /* Ensure they are above other elements */
 
     /* Counter-rotation: Invert the rotation of the parent .item */
     /* This keeps the buttons upright relative to the viewer */
@@ -120,7 +122,7 @@ header li:hover {
 
 /* Show buttons only when the parent image item is active */
 .images .item.active .image-buttons-container {
-    display: flex; /* Show when active */
+    display: flex !important; /* NEW: Force display:flex when active */
 }
 
 /* Styles for the individual buttons inside image-buttons-container */
