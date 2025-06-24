@@ -92,7 +92,8 @@ header li:hover {
     height: 100%;
     text-align: center;
     rotate: calc(60deg * var(--i));
-    transition: opacity 0.5s ease; /* Added to facilitate button visibility transition */
+    /* The transition for 'opacity' might still be here, but 'display' takes precedence */
+    /* If you want fade, remove display:none/flex and use opacity/pointer-events */
 }
 
 .images .item img {
@@ -106,14 +107,11 @@ header li:hover {
     left: 50%; /* Center horizontally */
     transform: translateX(-50%); /* For true centering */
     width: 100%;
-    display: flex;
+    /* Changed from opacity/pointer-events to display:none/flex */
+    display: none; /* Hidden by default */
     justify-content: center; /* Center buttons horizontally */
     gap: 20px; /* Space between the two buttons */
     z-index: 10; /* Ensure they are above other parts if needed */
-
-    opacity: 0; /* Hidden by default */
-    pointer-events: none; /* Make them unclickable when hidden */
-    transition: opacity 0.5s ease; /* Smooth fade in/out */
 
     /* Counter-rotation: Invert the rotation of the parent .item */
     /* This keeps the buttons upright relative to the viewer */
@@ -122,8 +120,7 @@ header li:hover {
 
 /* Show buttons only when the parent image item is active */
 .images .item.active .image-buttons-container {
-    opacity: 1;
-    pointer-events: auto; /* Make them clickable when active */
+    display: flex; /* Show when active */
 }
 
 /* Styles for the individual buttons inside image-buttons-container */

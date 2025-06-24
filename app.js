@@ -1,14 +1,17 @@
-let prev = document.getElementById('prev');
-let next = document.getElementById('next');
-let image = document.querySelector('.images');
-let items = document.querySelectorAll('.images .item'); // Refers to the .images .item elements
-let contents = document.querySelectorAll('.content .item'); // Refers to the .content .item elements
+// Declare variables globally so they are accessible to functions
+let prev;
+let next;
+let image;
+let items; // Refers to the .images .item elements
+let contents; // Refers to the .content .item elements
 
 let rotate = 0;
 let active = 0;
-let countItem = items.length; // Still refers to image items for counting
-let rotateAdd = 360 / countItem;
+let countItem;
+let rotateAdd;
+let autoNext; // Declare autoNext globally to clear it later if needed
 
+// --- Function Definitions ---
 function nextSlider(){
     active = active + 1 > countItem - 1 ? 0 : active + 1;
     rotate = rotate + rotateAdd;
@@ -24,7 +27,7 @@ function prevSlider(){
 function show(){
     image.style.setProperty("--rotate", rotate + 'deg');
 
-    // Update active class for content items
+    // Update active class for content items (right side description)
     contents.forEach((content, key) => {
         if(key == active){
             content.classList.add('active');
@@ -33,7 +36,7 @@ function show(){
         }
     });
 
-    // Update active class for image items (this will control button visibility below the photo)
+    // Update active class for image items (left side photos with buttons)
     items.forEach((item, key) => {
         if(key == active){
             item.classList.add('active');
@@ -43,16 +46,28 @@ function show(){
     });
 }
 
-next.onclick = nextSlider;
-prev.onclick = prevSlider;
-const autoNext = setInterval(nextSlider, 3000);
-
-// NEW: Device detection to hide AR button on desktop
+// --- DOMContentLoaded Listener ---
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize DOM-dependent variables only after the DOM is fully loaded
+    prev = document.getElementById('prev');
+    next = document.getElementById('next');
+    image = document.querySelector('.images');
+    items = document.querySelectorAll('.images .item');
+    contents = document.querySelectorAll('.content .item');
+
+    countItem = items.length;
+    rotateAdd = 360 / countItem;
+
+    // Connect event listeners to buttons
+    next.onclick = nextSlider;
+    prev.onclick = prevSlider;
+    autoNext = setInterval(nextSlider, 3000); // Start auto-sliding
+
+    // --- Device detection logic ---
     const arButtons = document.querySelectorAll('.ar-button');
 
-    // Basic detection for mobile/tablet user agents.
-    // This is not exhaustive but covers most common mobile devices where AR is expected.
+    // Basic detection for common mobile/tablet user agents.
+    // This aims to hide the AR button only on non-mobile/tablet devices (desktops).
     const isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     if (!isMobileOrTablet) {
@@ -61,7 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
             button.style.display = 'none';
         });
     }
-});
 
-// Initial call to show the first slide and its buttons
-show();
+    // --- Initial setup ---
+    // Call show() once the DOM is fully loaded and variables are initialized
+    show();
+});
