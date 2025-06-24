@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 body {
@@ -99,29 +100,25 @@ header li:hover {
 
 .images .item img {
   height: 420px;
-  pointer-events: none; /* So clicks pass through to buttons */
+  pointer-events: none;
 }
 
-/* Buttons container below each photo */
 .images .item .image-buttons-container {
   position: absolute;
-  bottom: 100px; /* Buttons below image */
+  bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
-  width: auto;
-  display: none; /* Hidden by default */
+  display: none;
   justify-content: center;
   gap: 20px;
   z-index: 10;
-  rotate: calc(-1 * var(--i) * 60deg); /* counter rotation */
+  rotate: calc(-1 * var(--i) * 60deg);
 }
 
-/* Show buttons only on active slide */
 .images .item.active .image-buttons-container {
   display: flex !important;
 }
 
-/* Buttons styles */
 .images .item .ar-button,
 .images .item .see-more-btn {
   padding: 12px 25px;
@@ -215,7 +212,6 @@ header li:hover {
   opacity: 1;
 }
 
-/* Hide AR buttons on desktop */
 @media (min-width: 1025px) {
   .ar-button {
     display: none !important;
