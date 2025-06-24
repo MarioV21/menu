@@ -33,7 +33,7 @@ function show(){
         }
     });
 
-    // NEW: Update active class for image items (this will control button visibility)
+    // Update active class for image items (this will control button visibility below the photo)
     items.forEach((item, key) => {
         if(key == active){
             item.classList.add('active');
@@ -46,6 +46,22 @@ function show(){
 next.onclick = nextSlider;
 prev.onclick = prevSlider;
 const autoNext = setInterval(nextSlider, 3000);
+
+// NEW: Device detection to hide AR button on desktop
+document.addEventListener('DOMContentLoaded', () => {
+    const arButtons = document.querySelectorAll('.ar-button');
+
+    // Basic detection for mobile/tablet user agents.
+    // This is not exhaustive but covers most common mobile devices where AR is expected.
+    const isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    if (!isMobileOrTablet) {
+        // If it's likely a desktop device, hide all AR buttons
+        arButtons.forEach(button => {
+            button.style.display = 'none';
+        });
+    }
+});
 
 // Initial call to show the first slide and its buttons
 show();

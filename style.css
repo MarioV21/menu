@@ -92,15 +92,14 @@ header li:hover {
     height: 100%;
     text-align: center;
     rotate: calc(60deg * var(--i));
-    /* Added to facilitate button visibility transition */
-    transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease; /* Added to facilitate button visibility transition */
 }
 
 .images .item img {
     height: 420px;
 }
 
-/* NEW: Styles for the container holding buttons within each image item */
+/* Styles for the container holding buttons within each image item */
 .images .item .image-buttons-container {
     position: absolute;
     bottom: 100px; /* Position below the image - adjust as needed */
@@ -143,22 +142,22 @@ header li:hover {
 }
 
 .images .item .ar-button {
-    background-color: #478860; /* AR button color */
+    background-color: #E88735; /* Orange color for AR button */
     color: #fff;
 }
 
 .images .item .ar-button:hover {
-    background-color: #3a704f; /* Darker on hover */
+    background-color: #d1752b; /* Darker orange on hover */
     transform: translateY(-2px); /* Slight lift on hover */
 }
 
 .images .item .see-more-btn {
-    background-color: #E88735; /* See more button color */
+    background-color: #E88735; /* Orange color for See More button (consistent) */
     color: #fff;
 }
 
 .images .item .see-more-btn:hover {
-    background-color: #d1752b; /* Darker on hover */
+    background-color: #d1752b; /* Darker orange on hover */
     transform: translateY(-2px); /* Slight lift on hover */
 }
 
@@ -205,10 +204,6 @@ header li:hover {
     opacity: 0;
     animation: showContent 0.5s 0.3s ease-in-out 1 forwards;
 }
-
-/* REMOVED: No more buttons in content block to animate */
-/* .content .item.active .see-more-btn { ... } */
-
 
 #prev,
 #next {
