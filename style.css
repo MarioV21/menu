@@ -94,7 +94,6 @@ header li:hover {
     height: 100%;
     text-align: center;
     rotate: calc(60deg * var(--i));
-    /* No opacity transition here, display handles visibility */
 }
 
 .images .item img {
@@ -109,55 +108,52 @@ header li:hover {
     transform: translateX(-50%); /* For true centering */
     width: 100%;
     
-    /* NEW: Changed from opacity/pointer-events to display */
     display: none; /* Hidden by default */
     justify-content: center; /* Center buttons horizontally */
     gap: 20px; /* Space between the two buttons */
     z-index: 10; /* Ensure they are above other elements */
 
-    /* Counter-rotation: Invert the rotation of the parent .item */
-    /* This keeps the buttons upright relative to the viewer */
-    rotate: calc(-1 * var(--i) * 60deg);
+    rotate: calc(-1 * var(--i) * 60deg); /* Counter-rotation */
 }
 
 /* Show buttons only when the parent image item is active */
 .images .item.active .image-buttons-container {
-    display: flex !important; /* NEW: Force display:flex when active */
+    display: flex !important; /* Force display:flex when active */
 }
 
 /* Styles for the individual buttons inside image-buttons-container */
 .images .item .ar-button,
 .images .item .see-more-btn {
-    padding: 12px 25px; /* Slightly adjusted padding */
-    border-radius: 25px; /* More rounded corners */
+    padding: 12px 25px;
+    border-radius: 25px;
     text-decoration: none;
     font-size: 1em;
     cursor: pointer;
     border: none;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Stronger shadow for pop */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform for hover effect */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease, transform 0.2s ease;
     white-space: nowrap;
 }
 
 .images .item .ar-button {
-    background-color: #E88735; /* Orange color for AR button */
+    background-color: #E88735;
     color: #fff;
 }
 
 .images .item .ar-button:hover {
-    background-color: #d1752b; /* Darker orange on hover */
-    transform: translateY(-2px); /* Slight lift on hover */
+    background-color: #d1752b;
+    transform: translateY(-2px);
 }
 
 .images .item .see-more-btn {
-    background-color: #E88735; /* Orange color for See More button (consistent) */
+    background-color: #E88735;
     color: #fff;
 }
 
 .images .item .see-more-btn:hover {
-    background-color: #d1752b; /* Darker orange on hover */
-    transform: translateY(-2px); /* Slight lift on hover */
+    background-color: #d1752b;
+    transform: translateY(-2px);
 }
 
 
@@ -168,6 +164,7 @@ header li:hover {
     left: 60%;
     text-align: justify;
     width: 350px;
+    z-index: 3; /* NEW: Ensure content appears above the images */
 }
 
 .content h1 {
@@ -175,7 +172,6 @@ header li:hover {
     font-size: xxx-large;
 }
 
-/* Content items will now just contain text, no buttons here */
 .content .item {
     display: none;
 }
