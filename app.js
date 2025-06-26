@@ -1,62 +1,46 @@
 document.addEventListener('DOMContentLoaded', () => {
-  let prev = document.getElementById('prev');
-  let next = document.getElementById('next');
-  let image = document.querySelector('.images');
-  let items = document.querySelectorAll('.images .item');
-  let contents = document.querySelectorAll('.content .item');
-  let rotate = 0;
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  const image = document.querySelector('.images');
+  const items = document.querySelectorAll('.images .item');
+  const contents = document.querySelectorAll('.content .item');
+  const arButtons = document.querySelectorAll('.ar-button');
+
   let active = 0;
-  let countItem = items.length;
-  let rotateAdd = 360 / countItem;
+  const count = items.length;
+  const rotateAdd = 360 / count;
+  let rotate = 0;
 
   function show() {
-    image.style.setProperty("--rotate", rotate + 'deg');
+    image.style.setProperty('--rotate', `${rotate}deg`);
     contents.forEach((c, i) => c.classList.toggle('active', i === active));
     items.forEach((it, i) => it.classList.toggle('active', i === active));
   }
 
-  function nextSlider() {
-    active = (active + 1) % countItem;
+  function nextSlide() {
+    active = (active + 1) % count;
     rotate += rotateAdd;
     show();
   }
 
-  function prevSlider() {
-    active = (active - 1 + countItem) % countItem;
+  function prevSlide() {
+    active = (active - 1 + count) % count;
     rotate -= rotateAdd;
     show();
   }
 
-  prev.onclick = prevSlider;
-  next.onclick = nextSlider;
-  setInterval(nextSlider, 3000);
+  prev.addEventListener('click', prevSlide);
+  next.addEventListener('click', nextSlide);
+  setInterval(nextSlide, 3000);
   show();
 
-  // AR Button Setup
-  const arButtons = document.querySelectorAll('.ar-button');
-  const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-  const isAndroid = /Android/.test(navigator.userAgent);
-  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-
+  // Direct AR activation
   arButtons.forEach(button => {
-    const usdz = button.getAttribute('href');
-    const glb = button.getAttribute('data-gltf');
-
-    const fullUSDZ = new URL(usdz, window.location.href).href;
-    const fullGLB = new URL(glb, window.location.href).href;
-
-    if (isiOS) {
-      button.setAttribute('href', fullUSDZ);
-      button.setAttribute('rel', 'ar');
-      button.setAttribute('target', '_blank');
-    } else if (isAndroid) {
-      const sceneViewerUrl = `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(fullGLB)}&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(fullGLB)};end;`;
-      button.setAttribute('href', sceneViewerUrl);
-      button.setAttribute('target', '_blank');
-      button.removeAttribute('rel');
-    } else {
-      // Desktop or unsupported — hide or disable
-      button.style.display = 'none';
-    }
+    button.addEventListener('click', () => {
+      const viewer = button.closest('.item').querySelector('model-viewer');
+      if (viewer && viewer.activateAR) {
+        viewer.activateAR();
+      }
+    });
   });
 });
