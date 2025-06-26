@@ -39,14 +39,13 @@ header li:hover {
     border-bottom: 2px solid #fff;
 }
 
-
 .slider {
     position: relative;
     width: 100%;
     height: 100vh;
     background-image: linear-gradient(to right, #2B2F3A, #0D0E12);
     overflow: hidden;
-    z-index: 1; /* Added to ensure proper stacking context */
+    z-index: 1;
 }
 
 .slider::before {
@@ -85,49 +84,50 @@ header li:hover {
     transition: transform 0.5s ease-in-out;
     outline: 3px dashed #fff5;
     outline-offset: -100px;
-    z-index: 2; /* Ensures images are above slider background */
+    z-index: 2;
 }
 
 .images .item {
+    pointer-events: none;
     position: absolute;
     width: 100%;
     height: 100%;
-    text-align: center;
     rotate: calc(60deg * var(--i));
+    transform-origin: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
 }
 
 .images .item img {
     height: 420px;
 }
 
-/* Styles for the container holding buttons within each image item */
+/* Counter-rotated wrapper to keep buttons facing upright */
+.images .item .image-buttons-outer {
+    margin-top: 20px;
+    transform: rotate(calc(-1 * var(--i) * 60deg));
+    display: flex;
+    justify-content: center;
+}
+
+/* Button container */
 .images .item .image-buttons-container {
-    position: absolute;
-    bottom: 100px; /* Position below the image - adjust as needed */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* For true centering */
-    width: 100%;
-    
-    display: none; /* Hidden by default */
-    justify-content: center; /* Center buttons horizontally */
-    gap: 20px; /* Space between the two buttons */
-    z-index: 10; /* Ensure they are above other elements */
-
-    rotate: calc(-1 * var(--i) * 60deg); /* Counter-rotation */
+    pointer-events: auto;
+    display: flex;
+    gap: 6px; /* 🔧 Tighter spacing between buttons */
+    z-index: 10;
 }
 
-/* Show buttons only when the parent image item is active */
-.images .item.active .image-buttons-container {
-    display: flex !important; /* Force display:flex when active */
-}
-
-/* Styles for the individual buttons inside image-buttons-container */
+/* Compact button styles */
 .images .item .ar-button,
 .images .item .see-more-btn {
-    padding: 12px 25px;
+    padding: 10px 18px; /* 🔧 Smaller padding */
     border-radius: 25px;
     text-decoration: none;
-    font-size: 1em;
+    font-size: 0.9em; /* 🔧 Slightly smaller font */
     cursor: pointer;
     border: none;
     text-align: center;
@@ -156,7 +156,6 @@ header li:hover {
     transform: translateY(-2px);
 }
 
-
 .content {
     color: #fff;
     position: absolute;
@@ -164,7 +163,7 @@ header li:hover {
     left: 60%;
     text-align: justify;
     width: 350px;
-    z-index: 3; /* NEW: Ensure content appears above the images */
+    z-index: 3;
 }
 
 .content h1 {
